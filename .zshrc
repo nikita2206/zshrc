@@ -19,6 +19,8 @@ gcb() {
     git fetch origin master && git branch --no-track $1 origin/master && git checkout $1;
 }
 
+alias extip='dig +short myip.opendns.com @resolver1.opendns.com'
+
 alias gpf='git push -f origin $(current_branch):$(current_branch)'
 compdef gpf=git
 
