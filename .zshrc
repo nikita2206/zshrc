@@ -11,6 +11,8 @@ ZSH_THEME="agnoster"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+autoload -Uz compinit && compinit
+
 gpu() {
     git fetch origin $1 && git checkout origin/$1 && git checkout -b $1;
 }
