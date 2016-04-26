@@ -21,6 +21,15 @@ gcb() {
     git fetch origin master && git branch --no-track $1 origin/master && git checkout $1;
 }
 
+phpu() {
+    ./bin/phpunit $@
+    if [ $? -eq 0 ]; then
+        notify-send "Tests passed" "PHPUnit tests passed in $PWD" --icon=emblem-default
+    else
+        notify-send "Tests failed" "PHPUnit tests failed in $PWD" --icon=dialog-error
+    fi
+}
+
 alias extip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 alias gpf='git push -f origin $(current_branch):$(current_branch)'
@@ -107,4 +116,5 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 export DEFAULT_USER="nikita"
+export ALSA_CARD="USBDAC"
 
