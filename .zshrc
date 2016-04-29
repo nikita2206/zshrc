@@ -30,6 +30,14 @@ phpu() {
     fi
 }
 
+oh() {
+    if [ $? -eq 0 ]; then
+        notify-send "Command finished" "Command finished in $PWD" --icon=emblem-default
+    else
+        notify-send "Command failed" "Command failed in $PWD" --icon=dialog-error
+    fi
+}
+
 alias extip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 alias gpf='git push -f origin $(current_branch):$(current_branch)'
