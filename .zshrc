@@ -52,6 +52,12 @@ compdef gpul=git
 alias ms='mysql'
 compdef ms=mysql
 
+alias php7='PATH=/usr/local/php7/bin:$PATH php'
+compdef php7=php
+
+alias ssys='sudo systemctl'
+compdef ssys='systemctl'
+
 msreimport() {
     mysql -e 'drop database '$1'; create database '$1';';
     mysql $1 < $2
