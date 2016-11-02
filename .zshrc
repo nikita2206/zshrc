@@ -7,6 +7,9 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 
+TIME='%Uuser %Ssystem %Eelapsed %PCPU (%Xtext+%Ddata %Mmax)k
+%Iinputs+%Ooutputs (%Fmajor+%Rminor)pagefaults %Wswaps'
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -23,6 +26,15 @@ gcb() {
 
 phpu() {
     ./bin/phpunit $@
+    if [ $? -eq 0 ]; then
+        notify-send "Tests passed" "PHPUnit tests passed in $PWD" --icon=emblem-default
+    else
+        notify-send "Tests failed" "PHPUnit tests failed in $PWD" --icon=dialog-error
+    fi
+}
+
+paru() {
+    ./app/console_test tests:run $@
     if [ $? -eq 0 ]; then
         notify-send "Tests passed" "PHPUnit tests passed in $PWD" --icon=emblem-default
     else
@@ -49,7 +61,7 @@ compdef gpc=git
 alias gpul='git pull origin $(current_branch):$(current_branch)'
 compdef gpul=git
 
-alias ms='mysql'
+alias ms='mysql --auto-rehash'
 compdef ms=mysql
 
 alias php7='PATH=/usr/local/php7/bin:$PATH php'
@@ -104,7 +116,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras symfony2)
+plugins=(git git-extras symfony2 stack sudo)
 
 source $ZSH/oh-my-zsh.sh
 
